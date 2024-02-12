@@ -24,8 +24,7 @@ service.use(
     },
   }).unless({
     path: [
-      { url: "/api/v1/padlocks", method: "POST" },
-      { url: /\/api\/v1\/padlocks\/.*/, methods: ["PUT", "DELETE"] },
+      { url: /.*/, method: "GET" },
     ],
   })
 );

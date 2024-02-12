@@ -6,11 +6,12 @@ const {
   createHandler,
   getHandler,
   getByIDHandler,
+  getByCategoryHandler,
   updateHandler,
   removeHandler,
 } = require("./handlers");
 const service = express();
-const port = get("CILINDERS_PORT");
+const port = get("FAVOURS_PORT");
 const cookieParser = require("cookie-parser");
 
 service.use(cookieParser());
@@ -24,16 +25,17 @@ service.use(
     },
   }).unless({
     path: [
-      { url: /.*/, method: "GET" },
+        { url: /.*/, method:"GET" },
     ],
   })
 );
 
-service.post("/api/v1/cilinders", createHandler);
-service.get("/api/v1/cilinders", getHandler);
-service.get("/api/v1/cilinders/:id", getByIDHandler);
-service.put("/api/v1/cilinders/:id", updateHandler);
-service.delete("/api/v1/cilinders/:id", removeHandler);
+service.post("/api/v1/favours", createHandler);
+service.get("/api/v1/favours", getHandler);
+service.get("/api/v1/favours/:id", getByIDHandler);
+service.get("/api/v1/favours/category/:id", getByCategoryHandler);
+service.put("/api/v1/favours/:id", updateHandler);
+service.delete("/api/v1/favours/:id", removeHandler);
 
 service.listen(port, () => {
   console.log(`Cilinders service is listening on port ${port}`);

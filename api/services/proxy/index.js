@@ -38,6 +38,14 @@ server.use(
   })
 );
 
+server.use(
+  "/api/v1/favours",
+  proxy(`http://127.0.0.1:${get("FAVOURS_PORT")}`, {
+    proxyReqPathResolver: (req) =>
+      `http://127.0.0.1:${get("FAVOURS_PORT")}/api/v1/favours${req.url}`,
+  })
+);
+
 
 // server.use("/", express.static(path.join(__dirname, "../../../web/build")));
 // server.get("*", (req, res) => {
