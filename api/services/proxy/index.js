@@ -47,10 +47,10 @@ server.use(
 );
 
 
-// server.use("/", express.static(path.join(__dirname, "../../../web/build")));
-// server.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../../../web/build", "index.html"));
-// });
+server.use("/", express.static(path.join(__dirname, "../../../web/build")));
+server.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../../web/build", "index.html"));
+});
 const PORT = get("APP_PORT") || 3000;
 
 server.listen(PORT, (err) =>

@@ -52,7 +52,6 @@ const registerHandler = async (req, res) => {
     const refreshToken = await jwt.sign(payload, refreshSecret, {
       expiresIn: REFRESH_TOKEN_EXPIRE_TIME,
     });
-    sendMail(email, "Welcome To Our Platform", welcomeTemplate(username));
     await res.cookie("token", token, {
       expires: new Date(Date.now() + TOKEN_EXPIRE_SECONDS),
       httpOnly: true,
