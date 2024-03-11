@@ -17,3 +17,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.border-bottom-blue{
+  border-bottom: #1E1E2A solid 4px;
+}
