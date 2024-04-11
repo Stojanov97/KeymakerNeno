@@ -1,4 +1,5 @@
 const path = require("path");
+const compression = require("compression");
 const proxy = require("express-http-proxy");
 const express = require("express");
 const get = require("../../pkg/config").get;
@@ -13,6 +14,7 @@ const allowCrossDomain = (req, res, next) => {
 };
 
 server.use(allowCrossDomain);
+server.use(compression());
 
 server.use(
   "/api/v1/auth",
