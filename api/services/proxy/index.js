@@ -48,6 +48,14 @@ server.use(
   })
 );
 
+server.use(
+  "/api/v1/news",
+  proxy(`http://127.0.0.1:${get("NEWS_PORT")}`, {
+    proxyReqPathResolver: (req) =>
+      `http://127.0.0.1:${get("NEWS_PORT")}/api/v1/news${req.url}`,
+  })
+);
+
 
 server.use("/", express.static(path.join(__dirname, "../../../web/build")));
 server.get("*", (req, res) => {

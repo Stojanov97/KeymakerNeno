@@ -5,9 +5,11 @@ const {validate} = require("../../../pkg/validator")
 
 const createHandler = async (req, res) => {
     try {
+      const { admin } = req.auth;
+      if (admin === false) throw { code: 401, error: "You aren't an admin" };
       await validate(req.body, CreateFavour);
       const data = await create(req.body);
-      res.status(201).json({ data: data, success: true });
+      return res.status(201).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
@@ -19,7 +21,7 @@ const createHandler = async (req, res) => {
   const getHandler = async (req, res) => {
     try {
       const data = await get();
-      res.status(200).json({ data: data, success: true });
+      return res.status(200).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
@@ -31,7 +33,7 @@ const createHandler = async (req, res) => {
   const getByIDHandler = async (req, res) => {
     try {
       const data = await getByID(req.params.id);
-      res.status(200).json({ data: data, success: true });
+      return res.status(200).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
@@ -43,7 +45,7 @@ const createHandler = async (req, res) => {
   const getByCategoryHandler = async (req, res) => {
     try {
       const data = await getByCategory(req.params.category);
-      res.status(200).json({ data: data, success: true });
+      return res.status(200).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
@@ -54,9 +56,11 @@ const createHandler = async (req, res) => {
   
   const updateHandler = async (req, res) => {
     try {
+      const { admin } = req.auth;
+      if (admin === false) throw { code: 401, error: "You aren't an admin" };
       await validate(req.body, UpdateFavour);
       const data = await update(req.params.id, req.body);
-      res.status(200).json({ data: data, success: true });
+      return res.status(200).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
@@ -67,8 +71,10 @@ const createHandler = async (req, res) => {
   
   const removeHandler = async (req, res) => {
     try {
+      const { admin } = req.auth;
+      if (admin === false) throw { code: 401, error: "You aren't an admin" };
       const data = await remove(req.params.id);
-      res.status(200).json({ data: data, success: true });
+      return res.status(200).json({ data: data, success: true });
     } catch (err) {
       return res.status(err.code || 500).json({
         success: false,
