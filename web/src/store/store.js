@@ -15,7 +15,7 @@ import rootReducer from "./reducerCombiner";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["theme"],
+  whitelist: ["theme", "lang",],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

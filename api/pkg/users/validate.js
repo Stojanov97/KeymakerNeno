@@ -1,6 +1,4 @@
 const UserRegister = {
-    name: "required|string",
-    lastName: "required|string",
     email: "required|email",
     username: "required|string",
     admin: "required|boolean",

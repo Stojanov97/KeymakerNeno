@@ -6,7 +6,6 @@
   gap: 40px;
   align-items: center;
   width: 100%;
-  z-index: 20;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 #navbar > a {
@@ -15,9 +14,23 @@
   text-align: center;
   text-decoration: none;
   color: white;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   transition: all 0.2s ease;
+}
+.lang-holder{
+  min-width: 145px;
+  max-width: 145px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.lang-holder>img{
+  width: 27%;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #navbar > a:hover {
@@ -32,13 +45,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 #logo-img > img{
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
 }
 
 #burger-nav {
@@ -73,7 +86,7 @@
   text-align: right;
   color: white;
   width: 90%;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   padding: 8px;
   padding-bottom: 3px;
@@ -87,22 +100,22 @@
 
 #nav-container {
   width: 100%;
-  /* height: 220px; */
   position: fixed;
-  top: 0; 
+  top: 0;
+  z-index: 100;
 }
 
 .show-drawer {
   transform: translateX(0%) !important;
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1190px) {
   #navbar {
     gap: 0;
     padding: 5px 50px;
     justify-content: space-between;
   }
-  #navbar > a {
+  #navbar > a, #navbar>.lang-holder {
     display: none;
   }
   #burger-nav {
@@ -118,8 +131,8 @@
 
 @media screen and (max-width: 480px) {
   #logo-img > img{
-    width: 120px !important;
-    height: 120px !important;
+    width: 90px !important;
+    height: 90px !important;
   }
   #navbar{
     padding: 0 20px;
@@ -128,6 +141,6 @@
     width: 250px;
   }
   #drawer-nav a {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
