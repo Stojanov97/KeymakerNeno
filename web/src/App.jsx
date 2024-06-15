@@ -8,7 +8,8 @@ import "./app.css";
 import { useEffect, useState } from "react";
 import { setAuth } from "./Slices/AuthSlice";
 import { Routes, Route } from "react-router-dom";
-import Iseo from "./Components/Pages/Iseo"
+import Iseo from "./Components/Pages/Iseo";
+import News from "./Components/Pages/News";
 
 const themes = {
   light: `${__dirname}../light.css`,
@@ -18,20 +19,26 @@ const themes = {
 function App() {
   const [logged, setLogged] = useState(false);
   const dispatch = useDispatch();
-  let check = useSelector((state) => state.checkToken.value)
+  let check = useSelector((state) => state.checkToken.value);
   useEffect(() => {
-    fetch("/api/v1/auth/refreshToken", {
-      method: "POST",
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data.success === true) {
-          setLogged(true);
-        } else {
-          setLogged(false);
-        }
-      })
-      .catch((err) => console.log(err));
+    (async () => {
+      try {
+        return await fetch("/api/v1/auth/refreshToken", {
+          method: "POST",
+        })
+          .then((data) => data.json())
+          .then((data) => {
+            if (data.success === true) {
+              setLogged(true);
+            } else {
+              setLogged(false);
+            }
+          })
+          .catch((err) => console.log(err));
+      } catch (err) {
+        return console.log(err);
+      }
+    })();
   }, [check]);
   useEffect(() => {
     dispatch(setAuth(logged));
@@ -53,7 +60,8 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/iseo" element={<Iseo/>} />
+                  <Route path="/iseo" element={<Iseo />} />
+                  <Route path="/news/:id" element={<News />} />
                 </Routes>
                 <Footer />
               </>

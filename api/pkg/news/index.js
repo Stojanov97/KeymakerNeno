@@ -1,7 +1,19 @@
 const mongoose = require("mongoose");
 
 const newsSchema = new mongoose.Schema({
-  content: {
+  content_mk: {
+    required: true,
+    type: String,
+  },
+  title_mk: {
+    required: true,
+    type: String,
+  },
+  content_en: {
+    required: true,
+    type: String,
+  },
+  title_en: {
     required: true,
     type: String,
   },
@@ -26,6 +38,14 @@ const get = async () => {
   }
 };
 
+const getById = async (id) => {
+  try {
+    return await News.findOne({ _id: id });
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const update = async (id, data) => {
   try {
     return await News.updateOne({ _id: id }, data);
@@ -43,8 +63,9 @@ const remove = async (id) => {
 };
 
 module.exports = {
-    create,
-    get,
-    update,
-    remove,
-}
+  create,
+  get,
+  getById,
+  update,
+  remove,
+};

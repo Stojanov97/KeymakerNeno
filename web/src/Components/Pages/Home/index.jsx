@@ -8,11 +8,12 @@ import IseoLogo from "../../../Images/Services/iseo-logo.webp";
 import Launch from "../../../Images/Services/launch.webp";
 import About from "../../../Images/about.webp";
 import NewsCard from "../../NewsCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState(false);
+  const dispatch = useDispatch();
   let logged = useSelector((state) => state.auth.value);
   const {i18n, t} = useTranslation();
   const chunk = (array, size) => {
@@ -28,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        await fetch("/api/v1/news")
+        return await fetch("/api/v1/news")
           .then((res) => res.json())
           .then((data) => setNews(data))
           .catch((err) => console.log(err));
@@ -37,6 +38,7 @@ const Home = () => {
       }
     })();
   }, []);
+  console.log(news);
   return (
     <div id="home">
       <div id="landing-img-div" loading="lazy">
@@ -77,9 +79,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {news.length > 0 && (
+      {news && (
         <div id="news-container">
-          {logged && (<div id="editNews"><p>{t("Edit")}</p> <p>{t("Add")}</p></div>)}
+          {logged && (<div id="editNews"><p>{t("Add")}</p></div>)}
           <h2>{t("News")}</h2>
           <Carousel
             showThumbs={false}

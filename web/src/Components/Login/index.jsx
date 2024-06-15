@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import {checkToken} from '../../Slices/CheckTokenSlice'
 import "./styles.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const lastURL = useSelector((state)=>state.url.value)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -31,7 +32,7 @@ const Login = () => {
           if (data.success === true) {
             setError(false);
             dispatch(checkToken());
-            navigate("/");
+            navigate(lastURL);
           } else {
             setError(data.err);
           }
@@ -41,7 +42,7 @@ const Login = () => {
   };
   return (
     <>
-      <XMarkIcon id="close-icon" onClick={()=>navigate("/")} />
+      <XMarkIcon id="close-icon" onClick={()=>navigate(lastURL)} />
       <div id="login-container">
         <h1>Login</h1>
         <form>

@@ -5,6 +5,7 @@ const { expressjwt: jwt } = require("express-jwt");
 const {
   createHandler,
   readHandler,
+  readByIdHandler,
   updateHandler,
   deleteHandler,
   getImageHandler,
@@ -29,6 +30,7 @@ service.use(
 
 service.post("/api/v1/news", createHandler);
 service.get("/api/v1/news", readHandler);
+service.get("/api/v1/news/:id", readByIdHandler);
 service.get("/api/v1/news/images/:id", getImageHandler);
 service.put("/api/v1/news/:id", updateHandler);
 service.delete("/api/v1/news/:id", deleteHandler);

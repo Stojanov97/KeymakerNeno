@@ -35,6 +35,7 @@ i18n.use(initReactI18next).init({
                 "Copyright":"All rights reserved 2024. Locksmith NENO by",
                 "News":"News",
                 "Edit":"Edit",
+                "Delete":"Delete",
                 "Add":"Add"
             }
         },
@@ -65,6 +66,7 @@ i18n.use(initReactI18next).init({
                 "Copyright":"Сите права задржани 2024. Клучар НЕНО од",
                 "News":"Новости",
                 "Edit":"Измени",
+                "Delete":"Избриши",
                 "Add":"Додади"
             }
         }

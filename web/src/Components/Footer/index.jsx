@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { checkToken } from "../../Slices/CheckTokenSlice";
 import { useTranslation } from "react-i18next";
+import { setURL } from "../../Slices/URLslice";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const Footer = () => {
         .then(() => dispatch(checkToken()))
         .catch((err) => console.log(err));
     } else {
+      console.log(window.location.pathname);
+      dispatch(setURL(window.location.pathname))
       navigate("/login");
     }
   };

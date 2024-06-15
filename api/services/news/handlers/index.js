@@ -1,8 +1,7 @@
-const { get, create, update, remove } = require("../../../pkg/news");
+const { get, getById, create, update, remove } = require("../../../pkg/news");
 const { CreateNews, UpdateNews } = require("../../../pkg/news/validate");
 const { validate } = require("../../../pkg/validator");
 const {
-  downloadAll,
   updateFile,
   upload,
   removeFile,
@@ -28,13 +27,19 @@ const createHandler = async (req, res) => {
 const readHandler = async (req, res) => {
   try {
     let news = await get();
-    let photos = await downloadAll("news");
-    news = news.map((newss) => {
-      return {
-        ...newss._doc,
-        ...{ photo: photos.find(({ id }) => newss._doc._id == id) || false },
-      };
+    return await res.json(news);
+  } catch (err) {
+    return res.status(err.code || 500).json({
+      success: false,
+      err: err || "Internal server error",
     });
+  }
+};
+
+const readByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let news = await getById(id);
     return await res.json(news);
   } catch (err) {
     return res.status(err.code || 500).json({
@@ -70,7 +75,7 @@ const deleteHandler = async (req, res) => {
     if (admin === false) throw { code: 401, error: "You aren't an admin" };
     const { id } = req.params;
     await remove(id);
-    await removeFile("item", id);
+    await removeFile("news", id);
     return await res.json({ success: true });
   } catch (err) {
     return res
@@ -81,15 +86,14 @@ const deleteHandler = async (req, res) => {
 
 const getImageHandler = async (req, res) => {
   try {
-    const path = await downloadByID("news", req.params.id);
-    return await res.sendFile(
-      path,
-      (err) => {
-        if (err) {
-          console.log(err);
-        }
+    let path = await downloadByID("news", req.params.id);
+    if(path===false) path = await downloadByID("news", "na");
+    console.log(path)
+    return await res.sendFile(path, (err) => {
+      if (err) {
+        console.log(err);
       }
-    );
+    });
   } catch (err) {
     return res
       .status(err.code || 500)
@@ -100,6 +104,7 @@ const getImageHandler = async (req, res) => {
 module.exports = {
   createHandler,
   readHandler,
+  readByIdHandler,
   updateHandler,
   deleteHandler,
   getImageHandler,
