@@ -23,18 +23,24 @@ const News = () => {
       }
     })();
   }, []);
-  console.log(news);
   return (
     <>
       <div className="news-divider">
-    {showDelete && <DeleteNews />}
+        {showDelete && <DeleteNews toggleShow={setShowDelete} />}
         {logged && (
           <>
-            <button className="delete-btn news-delete-btn" onClick={()=>setShowDelete(true)} >
-              {t("Delete")}
-            </button>
-            <br />
-            <button className="edit-btn">{t("Edit")}</button>
+            {!showDelete && (
+              <>
+                <button
+                  className="delete-btn news-delete-btn"
+                  onClick={() => setShowDelete(true)}
+                >
+                  {t("Delete")}
+                </button>
+                <br />
+                <button className="edit-btn">{t("Edit")}</button>
+              </>
+            )}
           </>
         )}
         <div className="grid-centerer">

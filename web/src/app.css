@@ -3,7 +3,7 @@ body {
 }
 
 
-.edit-btn{
+.edit-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -17,7 +17,7 @@ body {
 }
 
 
-.delete-btn{
+.delete-btn {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -30,7 +30,7 @@ body {
   cursor: pointer;
 }
 
-.pop-up{
+.pop-up {
   position: absolute;
   top: 0;
   left: 0;
@@ -42,10 +42,40 @@ body {
   background-color: rgba(0, 0, 0, 0.658);
 }
 
-.pop-up > div{
+.pop-up-content {
   max-width: 500px;
   min-width: 320px;
   width: 50%;
   background-color: #e6e6e6;
   position: relative;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 25px;
+}
+.pop-up-options-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.pop-up-options-container>button{
+  width: 140px;
+  height: 40px;
+  color: white;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.pop-up-options-container>button:nth-child(1){
+  background-color: red;
+}
+.pop-up-options-container>button:nth-child(2){
+  background-color: green;
 }
