@@ -1,11 +1,15 @@
 const CreateNews = {
-  title:"required|string",
-  content: "required|string",
+  title_mk:"required|string",
+  content_mk: "required|string",
+  title_en:"required|string",
+  content_en: "required|string",
 };
 
 const UpdateNews = {
-  title: "string",
-  content: "string",
+  title_mk: "string",
+  content_mk: "string",
+  title_en: "string",
+  content_en: "string",
 };
 
 module.exports = {

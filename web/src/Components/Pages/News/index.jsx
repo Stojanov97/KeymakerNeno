@@ -26,7 +26,7 @@ const News = () => {
   return (
     <>
       <div className="news-divider">
-        {showDelete && <DeleteNews toggleShow={setShowDelete} />}
+        {showDelete && <DeleteNews toggleShow={setShowDelete} info={news} />}
         {logged && (
           <>
             {!showDelete && (
@@ -49,8 +49,8 @@ const News = () => {
             alt="img"
           />
           <div>
-            <h1>{news.title}</h1>
-            <p>{news.content}</p>
+            <h1>{i18n.language === "mk" ? news.title_mk : news.title_en}</h1>
+            <p>{i18n.language === "mk" ? news.content_mk : news.title_en}</p>
           </div>
         </div>
       </div>

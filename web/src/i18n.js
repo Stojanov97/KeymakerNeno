@@ -36,7 +36,9 @@ i18n.use(initReactI18next).init({
                 "News":"News",
                 "Edit":"Edit",
                 "Delete":"Delete",
-                "Add":"Add"
+                "Add":"Add",
+                "DeleteNews":"Are you sure you want to delete this news?",
+                "Cancel":"Cancel"
             }
         },
         mk:{
@@ -67,7 +69,9 @@ i18n.use(initReactI18next).init({
                 "News":"Новости",
                 "Edit":"Измени",
                 "Delete":"Избриши",
-                "Add":"Додади"
+                "Add":"Додади",
+                "DeleteNews":"Дали сте сигурни дека сакате да ја избришете оваа вест?",
+                "Cancel":"Откажи"
             }
         }
     },

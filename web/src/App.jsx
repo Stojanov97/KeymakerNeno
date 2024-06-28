@@ -36,7 +36,7 @@ function App() {
           })
           .catch((err) => console.log(err));
       } catch (err) {
-        return console.log(err);
+        return alert(err);
       }
     })();
   }, [check]);

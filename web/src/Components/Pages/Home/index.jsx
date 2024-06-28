@@ -8,12 +8,11 @@ import IseoLogo from "../../../Images/Services/iseo-logo.webp";
 import Launch from "../../../Images/Services/launch.webp";
 import About from "../../../Images/about.webp";
 import NewsCard from "../../NewsCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const [news, setNews] = useState(false);
-  const dispatch = useDispatch();
   let logged = useSelector((state) => state.auth.value);
   const {i18n, t} = useTranslation();
   const chunk = (array, size) => {
@@ -79,7 +78,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {news && (
+      {news.length>0 && (
         <div id="news-container">
           {logged && (<div id="editNews"><p>{t("Add")}</p></div>)}
           <h2>{t("News")}</h2>
