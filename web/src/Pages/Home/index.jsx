@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import "./styles.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import DoorKeys from "../../../Images/Services/door-keys.webp";
-import CarKeys from "../../../Images/Services/car-keys.webp";
-import IseoLogo from "../../../Images/Services/iseo-logo.webp";
-import Launch from "../../../Images/Services/launch.webp";
-import About from "../../../Images/about.webp";
-import NewsCard from "../../NewsCard";
+import DoorKeys from "../../Images/Services/door-keys.webp";
+import CarKeys from "../../Images/Services/car-keys.webp";
+import IseoLogo from "../../Images/Services/iseo-logo.webp";
+import Launch from "../../Images/Services/launch.webp";
+import About from "../../Images/about.webp";
+import NewsCard from "../../Components/NewsCard";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [news, setNews] = useState(false);
   let logged = useSelector((state) => state.auth.value);
-  const {i18n, t} = useTranslation();
+  const { i18n, t } = useTranslation();
   const chunk = (array, size) => {
     return array.reduce((chunks, current, index) => {
       if (index % size === 0) {
@@ -30,21 +32,18 @@ const Home = () => {
       try {
         return await fetch("/api/v1/news")
           .then((res) => res.json())
-          .then((data) => setNews(data))
+          .then((data) => setNews(data.reverse()))
           .catch((err) => console.log(err));
       } catch (err) {
         return console.log(err);
       }
     })();
   }, []);
-  console.log(news);
   return (
     <div id="home">
       <div id="landing-img-div" loading="lazy">
         <h1>{t("BusinessName")}</h1>
-        <p>
-          {t("BusinessSlogan")}
-        </p>
+        <p>{t("BusinessSlogan")}</p>
       </div>
       <div id="services-container">
         <h2>{t("ServicesTitle")}</h2>
@@ -55,9 +54,7 @@ const Home = () => {
           </div>
           <div className="service-card">
             <img src={CarKeys} alt="CarKeys" />
-            <p>
-              {t("CarKeys")}
-            </p>
+            <p>{t("CarKeys")}</p>
           </div>
           <div className="service-card">
             <img src={IseoLogo} alt="ISEO" />
@@ -73,14 +70,23 @@ const Home = () => {
         <h2>{t("AboutTitle")}</h2>
         <div id="about-info-container">
           <img src={About} alt="about img" />
-          <div>
-            {t("AboutBio")}
-          </div>
+          <div>{t("AboutBio")}</div>
         </div>
       </div>
-      {news.length>0 && (
+      <span id="news-pointer"></span>
+      {news.length > 0 ? (
         <div id="news-container">
-          {logged && (<div id="editNews"><p>{t("Add")}</p></div>)}
+          {logged && (
+            <div id="editNews">
+              <p
+                onClick={() => {
+                  navigate("/news/add");
+                }}
+              >
+                {t("Add")}
+              </p>
+            </div>
+          )}
           <h2>{t("News")}</h2>
           <Carousel
             showThumbs={false}
@@ -96,6 +102,24 @@ const Home = () => {
             ))}
           </Carousel>
         </div>
+      ) : (
+        <>
+          {logged && (
+            <div id="news-container">
+              <div id="editNews">
+                <p
+                  onClick={async () => {
+                    navigate("/news/add");
+                  }}
+                >
+                  {t("Add")}
+                </p>
+              </div>
+              <h2>{t("News")}</h2>
+              <p>{t("NoNewsFnd")}</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

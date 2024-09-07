@@ -13,9 +13,11 @@ const {
 const service = express();
 const port = get("NEWS_PORT");
 const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload");
 
-service.use(cookieParser());
 service.use(express.json());
+service.use(fileUpload());
+service.use(cookieParser());
 service.use(
   jwt({
     secret: get("JWT_SECRET"),

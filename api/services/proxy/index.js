@@ -53,7 +53,6 @@ server.use(
   proxy(`http://127.0.0.1:${get("NEWS_PORT")}`, {
     proxyReqPathResolver: (req) =>
       `http://127.0.0.1:${get("NEWS_PORT")}/api/v1/news${req.url}`,
-    limit: "35mb",
   }),
 );
 

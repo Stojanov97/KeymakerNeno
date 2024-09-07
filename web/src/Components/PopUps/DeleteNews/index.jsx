@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../../../Slices/AuthSlice";
 import { useTranslation } from "react-i18next";
@@ -23,11 +23,9 @@ const DeleteNews = ({ toggleShow , info }) => {
           }
         })
         .catch((err) => console.log(err));
+        if(!logged) return;
       await fetch(`/api/v1/news/${info._id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }).then(() => {
         navigate("/");
       }).catch((err) => alert(err));

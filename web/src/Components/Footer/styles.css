@@ -1,7 +1,7 @@
 footer {
   padding: 20px 0 0;
   border-top: solid 3px var(--nav-color);
-  background-color: var(--footer-color);
+  background-image: url("../../Images/repeated-square-dark.webp");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,7 +68,7 @@ footer {
 
 #copyright-label {
   width: 100%;
-  background-color: #121212;
+  background-color: #1212127e;
   color: white;
   text-align: center;
   padding: 15px 10px;

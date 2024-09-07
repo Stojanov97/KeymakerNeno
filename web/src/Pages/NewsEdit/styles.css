@@ -1,0 +1,13 @@
+#news-edit-page {
+    margin-top: 120px;
+    padding: 20px 80px 40px 80px;
+}
+
+#news-edit-page>form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    resize: none;
+}

@@ -17,7 +17,7 @@ const newsSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-});
+}, { timestamps: true });
 
 const News = mongoose.model("News", newsSchema, "news");
 

@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles.css";
-import IseoCylinder from "../../../Images/iseoCylinder.webp";
-import IseoPadlock from "../../../Images/iseoPadlock.webp";
-import IseoLock from "../../../Images/iseoLock.webp";
-import IseoDoorPusher from "../../../Images/iseoDoorPusher.webp";
+import IseoCylinder from "../../Images/iseoCylinder.webp";
+import IseoPadlock from "../../Images/iseoPadlock.webp";
+import IseoLock from "../../Images/iseoLock.webp";
+import IseoDoorPusher from "../../Images/iseoDoorPusher.webp";
 
 const Products = () => {
   return (

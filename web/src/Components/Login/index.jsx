@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import {checkToken} from '../../Slices/CheckTokenSlice'
+import { checkToken } from "../../Slices/CheckTokenSlice";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,11 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const lastURL = useSelector((state)=>state.url.value)
+  const lastURL = useSelector((state) => state.url.value);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const fetchFromApi = async (e) => {
-    e.preventDefault();
+  const fetchFromApi = async () => {
     if (email.length < 3) {
       setError("Email is not valid");
       return;
@@ -32,9 +31,9 @@ const Login = () => {
           if (data.success === true) {
             setError(false);
             dispatch(checkToken());
-            navigate(lastURL);
+            return navigate(lastURL);
           } else {
-            setError(data.err);
+            return setError(data.err);
           }
         })
         .catch((err) => console.log(err));
@@ -42,7 +41,12 @@ const Login = () => {
   };
   return (
     <>
-      <XMarkIcon id="close-icon" onClick={()=>navigate(lastURL)} />
+      <XMarkIcon
+        id="close-icon"
+        onClick={() => {
+          navigate(lastURL);
+        }}
+      />
       <div id="login-container">
         <h1>Login</h1>
         <form>
@@ -58,7 +62,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" onClick={(e) => fetchFromApi(e)}>
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              return fetchFromApi();
+            }}
+          >
             Login
           </button>
         </form>

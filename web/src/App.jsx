@@ -2,14 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import Home from "./Components/Pages/Home";
+import Home from "./Pages/Home";
 import Login from "./Components/Login";
 import "./app.css";
 import { useEffect, useState } from "react";
 import { setAuth } from "./Slices/AuthSlice";
 import { Routes, Route } from "react-router-dom";
-import Iseo from "./Components/Pages/Iseo";
-import News from "./Components/Pages/News";
+import Iseo from "./Pages/Iseo";
+import News from "./Pages/News";
+import NewsEdit from "./Pages/NewsEdit"
 
 const themes = {
   light: `${__dirname}../light.css`,
@@ -62,6 +63,8 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/iseo" element={<Iseo />} />
                   <Route path="/news/:id" element={<News />} />
+                  <Route path="/news/add" element={<NewsEdit />} />
+                  <Route path="/news/edit/:id" element={<NewsEdit />} />
                 </Routes>
                 <Footer />
               </>

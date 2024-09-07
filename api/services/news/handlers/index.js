@@ -12,10 +12,11 @@ const createHandler = async (req, res) => {
   try {
     const { admin } = req.auth;
     if (admin === false) throw { code: 401, error: "You aren't an admin" };
+    console.log(req.body);
     await validate(req.body, CreateNews);
     let news = await create(req.body);
     req.files && upload(req.files.photo, "news", news._id);
-    return res.status(201).send("success");
+    return res.status(201).json({ success: true });
   } catch (err) {
     return res.status(err.code || 500).json({
       success: false,
@@ -88,7 +89,6 @@ const getImageHandler = async (req, res) => {
   try {
     let path = await downloadByID("news", req.params.id);
     if(path===false) path = await downloadByID("news", "na");
-    console.log(path)
     return await res.sendFile(path, (err) => {
       if (err) {
         console.log(err);

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const NewsCard = ({ newss }) => {
   const { i18n, t } = useTranslation();
+  let date = new Date(newss.createdAt).toLocaleDateString();
   return (
       <a className="news-card" href={`/news/${newss._id}`}>
         <img
@@ -12,7 +13,8 @@ const NewsCard = ({ newss }) => {
           height={200}
         />
         <h2 className="news-title">{i18n.language === "mk"? newss.title_mk : newss.title_en}</h2>
-        <p className="news-text">{i18n.language === "mk"? newss.content_mk : newss.title_en}</p>
+        <p className="news-text">{i18n.language === "mk"? newss.content_mk : newss.content_en}</p>
+        <p>{date}</p>
       </a>
   );
 };
